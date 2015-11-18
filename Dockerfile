@@ -13,14 +13,10 @@ FROM scienceis/uoa-inzight-base:latest
 MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 
 # install CAS specific packages
-RUN apt-get -y install --no-install-recommends \
-    libcurl4-openssl-dev \
-    libxml2-dev \
-    libmysqlclient-dev
+RUN apt-get -y install --no-install-recommends libmysqlclient-dev
 
 # install R packages
-RUN R -e "install.packages(c('RMySQL'), repos='http://cran.rstudio.com/', lib='/usr/lib/R/site-library')" \
-    && R -e "devtools::install_github('ramnathv/rCharts')"
+RUN R -e "install.packages(c('RMySQL'), repos='http://cran.rstudio.com/', lib='/usr/lib/R/site-library', dependencies=T)"
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
