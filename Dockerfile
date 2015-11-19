@@ -9,7 +9,8 @@ FROM scienceis/uoa-inzight-base:latest
 MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 
 # install R packages specific to iNZight CAS
-RUN apt-get install -y --no-install-recommends libmysqlclient-dev \
+RUN apt-get update \
+  && apt-get install -q -y git libmysqlclient-dev \
   && R -e "install.packages(c('RMySQL'), repos='http://cran.rstudio.com/', lib='/usr/lib/R/site-library')" \
   && rm -rf /srv/shiny-server/* \
   && git clone https://github.com/iNZightVIT/CAS.git \
