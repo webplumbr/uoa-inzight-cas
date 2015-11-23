@@ -10,7 +10,7 @@ FROM uoa-inzight-base:tom
 MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 
 ## list all necessary packages here:
-ENV R_PACKAGES '"RMySQL", "plyr", "lattice", "RCurl", "RJSONIO", "whisker", "yaml"'
+ENV R_PACKAGES '"RMySQL", "plyr", "lattice", "RCurl", "whisker", "yaml"'
 
 # install R packages specific to iNZight CAS
 RUN apt-get update \
