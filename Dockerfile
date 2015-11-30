@@ -4,7 +4,7 @@
 #
 # ------------------------------
 
-FROM scienceis/uoa-inzight-base:dev
+FROM scienceis/uoa-inzight-base:latest
 
 MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 
@@ -12,7 +12,9 @@ MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 # Since we fetch the latest changes from the associated Application~s master branch
 # this helps trigger date based build
 # The other option would be to tag git builds and refer to the latest tag
-ENV LAST_BUILD_DATE "2015-11-30"
+ENV LAST_BUILD_DATE="2015-11-30" 
+
+ENV DB_HOST="" DB_USER="" DB_PASS="" DB_NAME="" CONFIG_FILE="/srv/shiny-server/config.R"
 
 # install R packages specific to iNZight CAS
 RUN apt-get update \
@@ -29,3 +31,8 @@ RUN apt-get update \
   && rm -rf CAS-master/ \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# handle DB config info separately
+COPY config.R /srv/shiny-server/
+
+# start shiny server process - it listens to port 3838
+CMD ["/opt/shiny-server.sh"]
