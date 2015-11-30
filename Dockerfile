@@ -14,8 +14,6 @@ MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 # The other option would be to tag git builds and refer to the latest tag
 ENV LAST_BUILD_DATE="2015-11-30" 
 
-ENV DB_HOST="" DB_USER="" DB_PASS="" DB_NAME="" CONFIG_FILE="/srv/shiny-server/config.R"
-
 # install R packages specific to iNZight CAS
 RUN apt-get update \
   && apt-get install -q -y libmysqlclient-dev libcurl4-openssl-dev \
